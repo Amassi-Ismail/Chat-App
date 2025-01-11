@@ -1,0 +1,199 @@
+.chat-list {
+    flex: 1;
+    border-right: #555555 solid 1px;
+
+    .current-user {
+        display: flex;
+        padding: 20px;
+        align-items: center;
+        justify-content: space-between;
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .user-avatar {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+
+        .side-control {
+            display: flex;
+            gap: 20px;
+
+            .more-png {
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .search-container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+
+        .search-bar {
+            flex: 1;
+            background: rgba(17,25,40,0.5);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-radius: 10px;
+            padding: 15px;
+
+            .search-input {
+                background: transparent;
+                border: none;
+                outline: none;
+                color: #fff;
+                flex: 1;
+            }
+
+            .search-input::placeholder {
+                color: #fff;
+            }
+
+            .search-icon {
+                width: 20px;
+                height: 20px;
+                color: #fff;
+            }
+        }
+
+        .plus-icon {
+            width: 30px;
+            height: 30px;
+            background-color: rgba(17,25,40,0.5);
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
+        }
+    }
+
+    .chat-list-inn {
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        background: transparent;
+
+        .chat-list-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            cursor: pointer;
+            border-bottom: #555555 solid 1px;
+
+            .chat-avatar {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            .chat-info {
+                display: flex;
+                flex-direction: column;
+
+                .chat-user-name {
+                    font-weight: bolder;
+                }
+
+                .last-text {
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .addUser{
+            width: max-content;
+            height: max-content;
+            padding: 30px;
+            background-color: rgba(5, 0, 0, 0.61);
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+
+            form{
+                display: flex;
+                gap: 20px;
+
+                input{
+                    padding: 20px;
+                    border-radius: 10px;
+                    border: none;
+                    outline: none;
+                }
+
+                button{
+                    padding: 20px;
+                    border-radius: 10px;
+                    background-color: #ff9c4d;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                }
+            }
+
+            .user{
+                margin-top: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                color: white;
+                padding: 10px;
+
+                .detail{
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+
+                    img{
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+                }
+
+                button{
+                    padding: 10px;
+                    border-radius: 10px;
+                    background-color: #ff9c4d;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+}
+
+/* Scrollbar Styling */
+.chat-list-inn::-webkit-scrollbar {
+    width: 10px;
+}
+.chat-list-inn::-webkit-scrollbar-track {
+    background: #aeacac;
+    border-radius: 15px;
+}
+.chat-list-inn::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 15px;
+}
+.chat-list-inn::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

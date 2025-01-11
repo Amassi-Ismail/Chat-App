@@ -1,38 +1,42 @@
 import { create } from 'zustand'
 import {doc, getDoc} from "firebase/firestore";
 import {db} from "./firebase";
+import {userStore} from "./userState";
 
-export const userStore = create((set) => ({
-    currUser: null,
-    isLoading: true,
-    fetchUser: async (uid) => {
-        if (!uid) return set({
-            currUser: null,
-            isLoading: false
-        });
+export const chatStore = create((set) => ({
+    chatId: null,
+    user: null,
+    isCurrUserBlocked: false,
+    isOthUserBlocked: false,
+    changeChat: (chatId, user) => {
+        const currUser = userStore.getState().currUser;
 
-        try {
-            const docRef = doc(db, "users", uid);
-            const docSnap = await getDoc(docRef);
-
-            if (docSnap.exists()) {
-                set({
-                    currUser: docSnap.data(),
-                    isLoading: false,
-                })
-            } else {
-                set({
-                    currUser: null,
-                    isLoading: false,
-                })
-            }
-        } catch (err) {
-            console.error(err);
-            return set({
-                currUser: null,
-                isLoading: false
-            })
+        if (user.blocked.includes(currUser.id)) {
+           return set({
+               chatId,
+               user: null,
+               isCurrUserBlocked: true,
+               isOthUserBlocked: false
+           })
         }
 
+        else if (currUser.blocked.includes(user.id)) {
+            return set({
+                chatId,
+                user: user,
+                isCurrUserBlocked: false,
+                isOthUserBlocked: true
+            });
+        } else {
+            return set({
+                chatId,
+                user,
+                isCurrUserBlocked: false,
+                isOthUserBlocked: false
+            })
+        }
+    },
+    onBlockChange: () => {
+        set(state => ({...state, isOthUserBlocked: !state.isOthUserBlocked}));
     }
 }))

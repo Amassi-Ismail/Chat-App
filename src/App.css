@@ -1,0 +1,16 @@
+.App {
+    display: flex;
+    width: 170vh;
+    height: 80vh;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.38);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Adds shadow */
+}
+
+.loading-seg {
+    background-color: rgba(0, 0, 0, 0.38);
+    padding: 70px;
+    border-radius: 10px;
+    font-size: 35px;
+    font-weight: bold;
+}

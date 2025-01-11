@@ -1,0 +1,18 @@
+body {
+  background: #ffffff linear-gradient(to right, #e2e2e2, #ff9c4d);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensures body takes full height */
+  margin: 0; /* Removes default margin */
+  height: 100vh;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
