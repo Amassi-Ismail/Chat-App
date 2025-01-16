@@ -1,6 +1,5 @@
 .chat-list {
     flex: 1;
-    border-right: #555555 solid 1px;
 
     .current-user {
         display: flex;
@@ -79,6 +78,8 @@
 
     .chat-list-inn {
         display: flex;
+        overflow-y: scroll;
+        height: 60vh;
         flex-direction: column;
         border-radius: 10px;
         background: transparent;
