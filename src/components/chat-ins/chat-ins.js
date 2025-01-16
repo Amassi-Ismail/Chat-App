@@ -12,7 +12,7 @@ const ChatIns = () => {
     const [text, setText] = useState("");
     const endRef = useRef(null);
     const [chat, setChat] = useState();
-    const { chatId, user } = chatStore();
+    const { chatId, user , isCurrUserBlocked, isOthUserBlocked} = chatStore();
     const { currUser } = userStore();
     const [img, setImg] = useState({
         file: null,
@@ -100,9 +100,9 @@ const ChatIns = () => {
         <div className='chat-ins'>
             <div className='header'>
                 <div className='user'>
-                    <img src={user.avatar} alt='user.png' className='avatar'/>
+                    <img src={isCurrUserBlocked || isOthUserBlocked ? "./avt.png" : user.avatar} alt='user.png' className='avatar'/>
                     <div className='texts'>
-                        <span className='name'>{user.username}</span>
+                        <span className='name'>{isCurrUserBlocked || isOthUserBlocked ? "User" : user.username}</span>
                     </div>
                 </div>
             </div>
@@ -131,12 +131,12 @@ const ChatIns = () => {
                     <FontAwesomeIcon className='icon-ins' icon={faCamera}></FontAwesomeIcon>
                     <FontAwesomeIcon className='icon-ins' icon={faMicrophone}></FontAwesomeIcon>
                 </div>
-                <input className="send-input" type='text' placeholder='Send a message' onChange={(e) => setText(e.target.value)} />
+                <input className="send-input" type='text' placeholder={isCurrUserBlocked || isOthUserBlocked ? 'You cannot send a message ' : user.avatar} onChange={(e) => setText(e.target.value)} disabled={isCurrUserBlocked || isOthUserBlocked}/>
                 <div className='emoji'>
                     {/*<img src='/emoji.png' alt='emoji.png'/>*/}
                     <FontAwesomeIcon className='icon-ins' icon={faFaceLaugh}/>
                 </div>
-                <button className='send-btn' onClick={sendMessage}>Send</button>
+                <button className='send-btn' onClick={sendMessage} disabled={isCurrUserBlocked || isOthUserBlocked}>Send</button>
             </div>
         </div>
     )
