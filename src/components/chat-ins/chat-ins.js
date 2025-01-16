@@ -131,9 +131,8 @@ const ChatIns = () => {
                     <FontAwesomeIcon className='icon-ins' icon={faCamera}></FontAwesomeIcon>
                     <FontAwesomeIcon className='icon-ins' icon={faMicrophone}></FontAwesomeIcon>
                 </div>
-                <input className="send-input" type='text' placeholder={isCurrUserBlocked || isOthUserBlocked ? 'You cannot send a message ' : user.avatar} onChange={(e) => setText(e.target.value)} disabled={isCurrUserBlocked || isOthUserBlocked}/>
+                <input className="send-input" type='text' placeholder={isCurrUserBlocked || isOthUserBlocked ? 'You cannot send a message ' : 'Type a message'} onChange={(e) => setText(e.target.value)} disabled={isCurrUserBlocked || isOthUserBlocked}/>
                 <div className='emoji'>
-                    {/*<img src='/emoji.png' alt='emoji.png'/>*/}
                     <FontAwesomeIcon className='icon-ins' icon={faFaceLaugh}/>
                 </div>
                 <button className='send-btn' onClick={sendMessage} disabled={isCurrUserBlocked || isOthUserBlocked}>Send</button>

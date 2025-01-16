@@ -3,7 +3,21 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinus, faPlus, faSearch} from "@fortawesome/free-solid-svg-icons";
 import {useEffect, useState} from "react";
 import {userStore} from "../../config/userState";
-import {doc, getDoc, getDocs, onSnapshot, collection, query, where, setDoc, serverTimestamp, updateDoc, arrayUnion} from "firebase/firestore";
+import {
+    doc,
+    getDoc,
+    getDocs,
+    onSnapshot,
+    collection,
+    query,
+    where,
+    setDoc,
+    serverTimestamp,
+    updateDoc,
+    arrayUnion,
+    arrayRemove,
+    deleteDoc
+} from "firebase/firestore";
 import {db} from "../../config/firebase";
 import {toast} from "react-toastify";
 import {chatStore} from "../../config/chatState";
@@ -92,6 +106,30 @@ const ChatList = () => {
         }
     }
 
+    const removeChat = async (chat, user) => {
+        const userChatsRef = collection(db, "userchats");
+        const chatRef = doc(db, "chats", chat.chatId);
+
+        try {
+            await updateDoc(doc(userChatsRef, user.id), {
+                chats: arrayRemove({ chatId: chat.chatId }) // Assuming chatId is the identifier
+            });
+
+            await updateDoc(doc(userChatsRef, currUser.id), {
+                chats: arrayRemove({ chatId: chat.chatId }) // Assuming chatId is the identifier
+            });
+
+            await deleteDoc(chatRef);
+
+            setChats((prevChats) => prevChats.filter(chat1 => chat1.chatId !== chat.chatId));
+            toast.success("Chat removed successfully!");
+
+        } catch (err) {
+            console.log(err.message);
+            toast.error("Error removing chat: " + err);
+        }
+    }
+
     const selectChat = async (chat) => {
         const userChats = chats.map((item) => {
             const {user, ...rest} = item;
@@ -143,11 +181,12 @@ const ChatList = () => {
                     <div className='chat-list-item' key={chat.chatId} onClick={() => selectChat(chat)} style={{
                         backgroundColor: chat?.isSeen ? "transparent" : "orange"
                     }}>
-                        <img className='chat-avatar' src={chat.user.avatar || "/emoji.png"} alt='avatar.png'/>
+                        <img className='chat-avatar' src={chat.user.avatar || "./avt.png"} alt='avatar.png'/>
                         <div className='chat-info'>
                             <span className='chat-user-name'>{chat.user.username}</span>
                             <p className='last-text'>{chat.lastMessage}</p>
                         </div>
+                        <button onClick={() => removeChat(chat, chat.user)}>Delete chat</button>
                     </div>
                 ))}
 
@@ -158,7 +197,7 @@ const ChatList = () => {
                     </form>
                     {user && <div className="user">
                         <div className="detail">
-                            <img src={user.avatar || "/emoji.png"} alt=""/>
+                            <img src={user.avatar || "./avt.png"} alt=""/>
                             <span>{user.username}</span>
                         </div>
                         <button onClick={addUser}>Add User</button>
