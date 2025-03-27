@@ -9,18 +9,27 @@ export const chatStore = create((set) => ({
     isCurrUserBlocked: false,
     isOthUserBlocked: false,
     changeChat: (chatId, user) => {
-        const currUser = userStore.getState().currUser;
-
-        if (user.blocked.includes(currUser.id)) {
-           return set({
-               chatId,
-               user: null,
-               isCurrUserBlocked: true,
-               isOthUserBlocked: false
-           })
+        // If no user is provided, reset the chat state
+        if (!user) {
+            return set({
+                chatId: null,
+                user: null,
+                isCurrUserBlocked: false,
+                isOthUserBlocked: false
+            });
         }
 
-        else if (currUser.blocked.includes(user.id)) {
+        const currUser = userStore.getState().currUser;
+
+        if (user.blocked?.includes(currUser.id)) {
+            return set({
+                chatId,
+                user: null,
+                isCurrUserBlocked: true,
+                isOthUserBlocked: false
+            });
+        }
+        else if (currUser.blocked?.includes(user.id)) {
             return set({
                 chatId,
                 user: user,
@@ -33,7 +42,7 @@ export const chatStore = create((set) => ({
                 user,
                 isCurrUserBlocked: false,
                 isOthUserBlocked: false
-            })
+            });
         }
     },
     onBlockChange: () => {
