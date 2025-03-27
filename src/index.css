@@ -1,18 +1,23 @@
-body {
-  background: #ffffff linear-gradient(to right, #e2e2e2, #ff9c4d);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; /* Ensures body takes full height */
-  margin: 0; /* Removes default margin */
-  height: 100vh;
-  overflow: hidden;
-  flex-direction: column;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-r from-gray-100 to-indigo-100 min-h-screen;
+  }
 }
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-200;
+  }
+
+  .input-primary {
+    @apply w-full px-4 py-2 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-custom p-4;
+  }
 }
