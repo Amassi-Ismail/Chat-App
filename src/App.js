@@ -12,6 +12,7 @@ import {chatStore} from "./config/chatState";
 import { toast } from "react-toastify";  // Add this import
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
+import { Toaster } from "react-hot-toast";
 
 function App() {
     const {currUser, isLoading, fetchUser, updateUserStatus} = userStore();
@@ -91,6 +92,7 @@ function App() {
                 <Authentication />
             )}
             <Notifications />
+            <Toaster position="top-center" reverseOrder={false} />
         </>
     );
 }
