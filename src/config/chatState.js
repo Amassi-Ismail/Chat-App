@@ -3,6 +3,13 @@ import {doc, getDoc} from "firebase/firestore";
 import {db} from "./firebase";
 import {userStore} from "./userState";
 
+// Add messageTypes constant
+export const messageTypes = {
+    TEXT: 'text',
+    IMAGE: 'image',
+    REPLY: 'reply',
+};
+
 export const chatStore = create((set) => ({
     chatId: null,
     user: null,
